@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="number" id="id" placeholder="Enter product ID">
+    <button onclick="getData()">Search</button>
+    <div id="result"></div>
+    <script>
+        async function getData(){
+            let id=document.getElementById("id").value
+            let res =await fetch(`https://fakestoreapi.com/products/${id}`)
+            let data=await res.json()
+            console.log(data)
+            document.getElementById("result").innerHTML = `<h2>${data.title}</h2><p>${data.description}</p><p>$${data.price}</p>`
+        }
+    </script>
+
+</body>
+</html>

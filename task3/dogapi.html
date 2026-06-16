@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="breed" placeholder="Enter dog breed">
+    <button onclick="getData()">Search</button>
+    <div id="result"></div>
+    <script>
+        async function getData(){
+            const breed=document.getElementById("breed").value
+            try{
+                const res=await fetch(`https://dog.ceo/api/breed/${breed}/images/random`)
+                if(!res.ok){
+                    throw new Error("Breed not found")
+                }else{
+                    const data=await res.json()
+                    console.log(data)
+                    document.getElementById("result").innerHTML = `<img src="${data.message}" alt="Dog Image" style="max-width: 300px;">`
+                }
+            }
+            catch(error){
+                console.error(error)
+                document.getElementById("result").innerHTML = `<p style="color: red;">${error.message}</p>`
+            }
+        }
+    </script>
+</body>
+</html>
